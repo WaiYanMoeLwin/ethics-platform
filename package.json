@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint:content": "node scripts/lint-content.mjs",
+    "lint:content": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/lint-content.mjs",
     "analyse": "node docs/analysis/analyse.mjs"
   },
   "dependencies": {
