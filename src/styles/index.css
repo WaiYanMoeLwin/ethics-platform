@@ -27,6 +27,27 @@
   }
 }
 
+/* The verdict stamp presses in on reveal (CLAUDE.md §8). This is the only
+   thing in the interface that animates. */
+@keyframes stamp-press {
+  0% {
+    transform: scale(1.35) rotate(-7deg);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(0.94) rotate(-3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(-2deg);
+    opacity: 1;
+  }
+}
+
+.animate-stamp {
+  animation: stamp-press 240ms cubic-bezier(0.2, 0.75, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

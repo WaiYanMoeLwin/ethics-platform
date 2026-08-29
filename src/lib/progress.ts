@@ -6,17 +6,24 @@ import { useSyncExternalStore } from "react";
  *  - `code`: a participant code the participant invents from a fixed rule.
  *    The developer never records the mapping. See CLAUDE.md §7.
  *  - `completedModules`: which modules the participant has marked done.
+ *  - `scenarioLabComplete`: whether the Scenario Lab has been worked through.
  *
- * No names, no emails, no answers, no analytics. If you are about to add a
- * third field here, re-read CLAUDE.md §2 first.
+ * These three are the flow-progress state the post-test gate needs (CLAUDE.md
+ * §7). No names, no emails, no answers, no scores, no analytics. If you are
+ * about to add another field here, re-read CLAUDE.md §2 first.
  */
 export interface ProgressState {
   code: string | null;
   completedModules: string[];
+  scenarioLabComplete: boolean;
 }
 
 const STORAGE_KEY = "dataethics.progress.v1";
-const EMPTY: ProgressState = { code: null, completedModules: [] };
+const EMPTY: ProgressState = {
+  code: null,
+  completedModules: [],
+  scenarioLabComplete: false,
+};
 
 function read(): ProgressState {
   if (typeof window === "undefined") return EMPTY;
@@ -31,6 +38,7 @@ function read(): ProgressState {
             (x): x is string => typeof x === "string",
           )
         : [],
+      scenarioLabComplete: parsed.scenarioLabComplete === true,
     };
   } catch {
     return EMPTY;
@@ -104,4 +112,8 @@ export function setModuleComplete(id: string, complete: boolean): void {
   if (complete) set.add(id);
   else set.delete(id);
   write({ ...cache, completedModules: [...set] });
+}
+
+export function setScenarioLabComplete(complete: boolean): void {
+  write({ ...cache, scenarioLabComplete: complete });
 }
