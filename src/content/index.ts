@@ -26,6 +26,15 @@ export const PRINCIPLE_IDS: PrincipleId[] = [
   "sensitive",
 ];
 
+/** Short human labels for each principle, for tags and headings. */
+export const PRINCIPLE_LABELS: Record<PrincipleId, string> = {
+  tradeoff: "Personalization trade-off",
+  consent: "Informed consent",
+  minimization: "Data minimization",
+  purpose: "Purpose limitation",
+  sensitive: "Sensitive data",
+};
+
 export const getModule = (id: PrincipleId): Module | undefined =>
   modules.find((m) => m.id === id);
 

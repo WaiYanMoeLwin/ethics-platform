@@ -1,24 +1,26 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { useProgress } from "../../lib/progress";
 
 const navItems = [
   { to: "/", label: "Home", end: true },
-  { to: "/module/tradeoff", label: "Modules", end: false },
   { to: "/scenarios", label: "Scenario Lab", end: false },
   { to: "/study", label: "Study", end: false },
 ];
 
 function linkClass({ isActive }: { isActive: boolean }) {
   return [
-    "font-mono text-sm px-2 py-1 rounded",
-    isActive ? "text-ink bg-rule" : "text-slate hover:text-ink",
+    "rounded px-2 py-1 font-mono text-sm",
+    isActive ? "bg-rule text-ink" : "text-slate hover:text-ink",
   ].join(" ");
 }
 
 export default function Layout() {
+  const { code } = useProgress();
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <header className="border-b border-rule">
-        <div className="mx-auto max-w-3xl px-4 py-3 flex items-center justify-between gap-4">
+        <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3">
           <span className="font-display font-bold text-ink">DataEthics</span>
           <nav className="flex items-center gap-1">
             {navItems.map((item) => (
@@ -32,6 +34,17 @@ export default function Layout() {
               </NavLink>
             ))}
           </nav>
+          <div className="font-mono text-xs">
+            {code ? (
+              <span className="rounded border border-rule px-2 py-1 text-slate">
+                code: <span className="text-ink">{code}</span>
+              </span>
+            ) : (
+              <NavLink to="/study" className="text-slate underline">
+                set participant code
+              </NavLink>
+            )}
+          </div>
         </div>
       </header>
 
