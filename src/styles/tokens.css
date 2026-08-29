@@ -1,0 +1,10 @@
+/* Design tokens — CLAUDE.md §8. Single source of truth for colour. */
+:root {
+  --ink: #14181f; /* Primary text */
+  --paper: #f7f8fa; /* Background */
+  --slate: #5a6472; /* Secondary text */
+  --rule: #dde2e9; /* Hairlines, borders */
+  --ethical: #0e6e63; /* Ethical verdict, primary actions */
+  --borderline: #b07d18; /* Borderline verdict */
+  --unethical: #a32e3c; /* Unethical verdict */
+}
