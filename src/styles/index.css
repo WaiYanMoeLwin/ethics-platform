@@ -1,4 +1,5 @@
 @import "./tokens.css";
+@import "./fonts.css";
 
 @tailwind base;
 @tailwind components;
@@ -21,9 +22,12 @@
     font-family: "Bricolage Grotesque", system-ui, sans-serif;
   }
 
+  /* --ink, not --ethical: the ring must stay visible on the teal primary
+     buttons too. Offset keeps it clear of the element's own border. */
   :focus-visible {
-    outline: 2px solid var(--ethical);
+    outline: 2px solid var(--ink);
     outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 

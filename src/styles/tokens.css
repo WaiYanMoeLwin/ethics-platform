@@ -4,7 +4,7 @@
   --paper: #f7f8fa; /* Background */
   --slate: #5a6472; /* Secondary text */
   --rule: #dde2e9; /* Hairlines, borders */
-  --ethical: #0e6e63; /* Ethical verdict, primary actions */
-  --borderline: #b07d18; /* Borderline verdict */
-  --unethical: #a32e3c; /* Unethical verdict */
+  --ethical: #0e6e63; /* Ethical verdict, primary actions — 6.1:1 on white */
+  --borderline: #8f6410; /* Borderline verdict — darkened from #b07d18 for WCAG AA (now 5.2:1 on white; #b07d18 was 3.6:1 and failed as text) */
+  --unethical: #a32e3c; /* Unethical verdict — 7.0:1 on white */
 }

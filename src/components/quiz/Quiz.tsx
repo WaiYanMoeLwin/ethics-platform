@@ -23,7 +23,7 @@ export default function Quiz({
   const [finished, setFinished] = useState(false);
 
   const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const promptRef = useRef<HTMLParagraphElement | null>(null);
+  const promptRef = useRef<HTMLHeadingElement | null>(null);
   const advanceRef = useRef<HTMLButtonElement | null>(null);
   const finishedRef = useRef<HTMLDivElement | null>(null);
   const didMount = useRef(false);
@@ -113,14 +113,14 @@ export default function Quiz({
         Question {index + 1} of {questions.length}
       </p>
 
-      <p
+      <h3
         ref={promptRef}
         id={promptId}
         tabIndex={-1}
         className="mt-2 font-display text-lg font-semibold leading-snug outline-none"
       >
         {question.prompt}
-      </p>
+      </h3>
 
       <div
         role="radiogroup"

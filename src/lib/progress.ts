@@ -3,8 +3,8 @@ import { useSyncExternalStore } from "react";
 /**
  * The only thing this app persists.
  *
- *  - `code`: a participant code the participant invents from a fixed rule.
- *    The developer never records the mapping. See CLAUDE.md §7.
+ *  - `username`: a username the participant chooses. They type the same one
+ *    into all three forms. The developer never records the mapping. CLAUDE.md §7.
  *  - `completedModules`: which modules the participant has marked done.
  *  - `scenarioLabComplete`: whether the Scenario Lab has been worked through.
  *
@@ -13,14 +13,14 @@ import { useSyncExternalStore } from "react";
  * about to add another field here, re-read CLAUDE.md §2 first.
  */
 export interface ProgressState {
-  code: string | null;
+  username: string | null;
   completedModules: string[];
   scenarioLabComplete: boolean;
 }
 
 const STORAGE_KEY = "dataethics.progress.v1";
 const EMPTY: ProgressState = {
-  code: null,
+  username: null,
   completedModules: [],
   scenarioLabComplete: false,
 };
@@ -30,9 +30,15 @@ function read(): ProgressState {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return EMPTY;
-    const parsed = JSON.parse(raw) as Partial<ProgressState>;
+    const parsed = JSON.parse(raw) as Partial<ProgressState> & { code?: unknown };
+    const stored =
+      typeof parsed.username === "string"
+        ? parsed.username
+        : typeof parsed.code === "string" // pre-rename key
+          ? parsed.code
+          : null;
     return {
-      code: typeof parsed.code === "string" ? parsed.code : null,
+      username: stored,
       completedModules: Array.isArray(parsed.completedModules)
         ? parsed.completedModules.filter(
             (x): x is string => typeof x === "string",
@@ -94,13 +100,13 @@ export function getProgress(): ProgressState {
   return cache;
 }
 
-export function setParticipantCode(code: string): void {
-  const trimmed = code.trim();
-  write({ ...cache, code: trimmed.length > 0 ? trimmed : null });
+export function setUsername(username: string): void {
+  const trimmed = username.trim();
+  write({ ...cache, username: trimmed.length > 0 ? trimmed : null });
 }
 
-export function clearParticipantCode(): void {
-  write({ ...cache, code: null });
+export function clearUsername(): void {
+  write({ ...cache, username: null });
 }
 
 export function isModuleComplete(id: string): boolean {

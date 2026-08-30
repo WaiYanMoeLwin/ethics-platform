@@ -100,7 +100,7 @@ function ClosingSummary({ onRestart }: { onRestart: () => void }) {
         <button
           type="button"
           onClick={onRestart}
-          className="font-mono text-sm text-slate underline"
+          className="inline-block py-1 font-mono text-sm text-slate underline"
         >
           Start again
         </button>

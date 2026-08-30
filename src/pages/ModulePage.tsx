@@ -109,7 +109,7 @@ export default function ModulePage() {
             <button
               type="button"
               onClick={() => setModuleComplete(mod.id, false)}
-              className="ml-3 text-slate underline"
+              className="ml-3 inline-block py-1 text-slate underline"
             >
               Undo
             </button>

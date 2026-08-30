@@ -83,9 +83,10 @@ export default function CaseCard({
                 href={study.source.url}
                 target="_blank"
                 rel="noreferrer"
-                className="underline"
+                className="inline-block py-0.5 underline"
               >
-                Link
+                Open source
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
             </>
           ) : null}
